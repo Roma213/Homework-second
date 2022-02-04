@@ -8,10 +8,12 @@ namespace Domain.Models
     {
         public Guid Id { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public string PostalCode { get; set; }
+        public string? PostalCode { get; set; }
+        
+        public int? Population { get; set; }
 
-        public virtual ICollection<Company> Companies { get; set; }
+        public virtual ICollection<Company>? Companies { get; set; }
     }
 }

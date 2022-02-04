@@ -9,10 +9,6 @@ namespace BLL.Classes
 {
     public class EmployerService: BaseService<Employer>, IEmployerService
     {
-        private readonly ApplicationContext _context;
-        
-        public EmployerService(ApplicationContext context):base(context)
-        {
-        }
+       
     }
 }

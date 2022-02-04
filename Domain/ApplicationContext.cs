@@ -7,7 +7,7 @@ namespace Domain
     {
         public ApplicationContext()
         {
-            Database.EnsureCreated();
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -26,8 +26,9 @@ namespace Domain
         public DbSet<City> Cities { get; set; }
 
         public DbSet<Company> Companies { get; set; }
-
         
+        public DbSet<JobTitle> JobTitles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employer>()
@@ -43,11 +44,17 @@ namespace Domain
 
             modelBuilder.Entity<City>()
                 .HasMany(x => x.Companies)
-                .WithOne(x => x.City)
-                .HasForeignKey(x => x.CityId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .WithMany(x => x.Cities)
+                .UsingEntity(o => o.ToTable("Offices"));
 
             modelBuilder.Entity<EmployerSkill>().HasKey(sc => new { sc.EmployerId, sc.SkillId });
+
+            modelBuilder.Entity<JobTitle>()
+                .HasMany(j => j.Employers)
+                .WithOne(e => e.JobTitle)
+                .HasForeignKey(e => e.JobTitleId)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

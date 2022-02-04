@@ -11,9 +11,9 @@ namespace BLL.Classes
     public class BaseService<T> : IBaseService<T> where T: class
     {
         private readonly ApplicationContext _context;
-        public BaseService(ApplicationContext context)
+        public BaseService()
         {
-            _context = context;
+            _context = new ApplicationContext();
         }
         public void Add(T entity)
         {

@@ -11,7 +11,7 @@ namespace Domain.Models
 
         public Guid? CityId { get; set; }
 
-        public virtual City City { get; set; }
+        public virtual ICollection<City> Cities { get; set; }
 
         public virtual ICollection<Employer> Employers { get; set; }
     }
